@@ -10,6 +10,9 @@ namespace Backup_Rotator
 {
     class Program
     {
+        /// <summary>
+        /// 
+        /// </summary>
         static string SourceDir = ConfigurationManager.AppSettings["SourceDirectory"];
         static string DestDir = ConfigurationManager.AppSettings["DestinationDirectory"];
         static char SplitChar = Convert.ToChar(ConfigurationManager.AppSettings["DateSeperator"]);
