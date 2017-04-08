@@ -15,6 +15,7 @@ namespace Backup_Rotator
         /// </summary>
         static string SourceDir = ConfigurationManager.AppSettings["SourceDirectory"];
         static string DestDir = ConfigurationManager.AppSettings["DestinationDirectory"];
+        static string LogDirectory = ConfigurationManager.AppSettings["LogDirectory"];
         static char SplitChar = Convert.ToChar(ConfigurationManager.AppSettings["DateSeperator"]);
         static bool RemoveSourceFiles = Convert.ToBoolean(ConfigurationManager.AppSettings["RemoveSourceFiles"]);
         static int LowestLogLevel = Convert.ToInt32(ConfigurationManager.AppSettings["LowestLogLevel"]);
@@ -22,10 +23,12 @@ namespace Backup_Rotator
         static int WeeklyBackupsToKeep = Convert.ToInt32(ConfigurationManager.AppSettings["WeeklyBackupsToKeep"]);
         static int MonthlyBackupsToKeep = Convert.ToInt32(ConfigurationManager.AppSettings["MonthlyBackupsToKeep"]);
         static int YearlyBackupsToKeep = Convert.ToInt32(ConfigurationManager.AppSettings["YearlyBackupsToKeep"]);
-        static Logger logger = new Logger(LowestLogLevel, Environment.CurrentDirectory + "\\Logs");
+        static Logger logger;
         static void Main(string[] args)
         {
-            logger.LogLine("Backup Rotator V1.0 Build 12");
+            Directory.CreateDirectory(LogDirectory);
+            logger = new Logger(LowestLogLevel, LogDirectory);
+            logger.LogLine("Backup Rotator V1.1 Build 13");
             if(!Directory.Exists(SourceDir))
             {
                 logger.LogLine(2, "Source directory does not exist");
